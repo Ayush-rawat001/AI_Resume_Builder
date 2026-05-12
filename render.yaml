@@ -9,7 +9,7 @@ services:
     envVars:
       - key: ConnectionStrings__DefaultConnection
         fromDatabase:
-          name: resume-ai-db # Or your manual connection string
+          name: resume-ai-db
       - key: Jwt__Key
         generateValue: true
       - key: Jwt__Issuer
@@ -29,7 +29,7 @@ services:
         fromDatabase:
           name: resume-ai-db
       - key: Services__SectionService
-        value: http://resume-ai-sections:8080 # Internal Render URL
+        value: http://resume-ai-sections:8080
 
   # 🧩 Section Service
   - type: web
@@ -55,7 +55,7 @@ services:
         fromDatabase:
           name: resume-ai-db
       - key: Groq__ApiKey
-        sync: false # Set this manually in Render Dashboard
+        sync: false
 
   # 🔎 Job Search Service
   - type: web
@@ -117,12 +117,12 @@ services:
       - key: ReverseProxy__Clusters__job_search_cluster__Destinations__destination1__Address
         value: http://resume-ai-job-search:8080
 
-  # 🌐 Frontend (React)
-  - type: static_site
+  # 🌐 Frontend (React Static Site)
+  - type: web
     name: resume-ai-frontend
-    env: static
+    runtime: static
     buildCommand: npm install && npm run build
-    publishPath: ./resumeai-frontend/resumeai/dist
+    staticPublishPath: ./resumeai-frontend/resumeai/dist
     envVars:
       - key: VITE_API_GATEWAY_URL
         fromService:
