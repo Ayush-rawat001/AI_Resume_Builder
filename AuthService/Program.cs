@@ -114,4 +114,25 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try {
+        var context = services.GetRequiredService<AppDbContext>();
+        context.Database.EnsureCreated();
+        if (!context.Users.Any(u => u.Email == "admin@resumeai.com"))
+        {
+            context.Users.Add(new User {
+                Email = "admin@resumeai.com",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("Admin123!"),
+                FullName = "System Admin",
+                Role = "Admin"
+            });
+            context.SaveChanges();
+        }
+    } catch (Exception ex) {
+        Console.WriteLine($"Seeding error: {ex.Message}");
+    }
+}
+
 app.Run();

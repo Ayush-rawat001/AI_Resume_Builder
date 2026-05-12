@@ -127,16 +127,15 @@ services:
       - key: ReverseProxy__Clusters__job_search_cluster__Destinations__destination1__Address
         value: http://resume-ai-job-search:8080
 
-  # 🌐 Frontend (React Static Site)
+  # 🌐 Frontend (React Docker Service)
   - type: web
     name: resume-ai-frontend
-    env: static
-    buildCommand: cd resumeai-frontend/resumeai && npm install && npm run build
-    staticPublishPath: ./resumeai-frontend/resumeai/dist
+    env: docker
+    dockerContext: ./resumeai-frontend/resumeai
+    dockerfilePath: ./resumeai-frontend/resumeai/Dockerfile
+    plan: free
     envVars:
+      - key: PORT
+        value: 8080
       - key: VITE_API_GATEWAY_URL
         value: https://resume-ai-gateway.onrender.com
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
