@@ -118,7 +118,7 @@ services:
         value: http://resume-ai-job-search:8080
 
   # 🌐 Frontend (React)
-  - type: static
+  - type: static_site
     name: resume-ai-frontend
     env: static
     buildCommand: npm install && npm run build
