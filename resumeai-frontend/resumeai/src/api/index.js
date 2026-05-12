@@ -2,7 +2,10 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 
 // ─── API Gateway Configuration ────────────────────────────────────────────────
-const GATEWAY_URL = import.meta.env.VITE_API_GATEWAY_URL || 'http://localhost:4000';
+// Use environment variable, or fallback to production URL if running on Render, otherwise localhost
+const isRender = typeof window !== 'undefined' && window.location.hostname.includes('onrender.com');
+const GATEWAY_URL = import.meta.env.VITE_API_GATEWAY_URL || 
+                    (isRender ? 'https://resume-ai-gateway.onrender.com' : 'http://localhost:4000');
 
 export const SERVICES = {
   auth:      GATEWAY_URL,
