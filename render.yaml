@@ -129,7 +129,7 @@ services:
 
   # 🌐 Frontend (React Docker Service)
   - type: web
-    name: resume-ai-frontend
+    name: resume-ai-ui
     env: docker
     dockerContext: ./resumeai-frontend/resumeai
     dockerfilePath: ./resumeai-frontend/resumeai/Dockerfile
