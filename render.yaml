@@ -12,7 +12,7 @@ services:
       - key: ConnectionStrings__DefaultConnection
         sync: false
       - key: Jwt__Key
-        value: ResumeAI_Master_Security_Key_2026_Secure_FullStack # 👈 Synchronized Key
+        value: ResumeAI_Master_Security_Key_2026_Secure_FullStack
       - key: Jwt__Issuer
         value: ResumeAI
       - key: Jwt__Audience
