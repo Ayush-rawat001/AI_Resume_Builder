@@ -31,7 +31,7 @@ services:
       - key: ConnectionStrings__DefaultConnection
         sync: false
       - key: Services__SectionService
-        value: http://resume-ai-sections:8080
+        value: https://resume-ai-sections.onrender.com
 
   # 🧩 Section Service
   - type: web
@@ -98,9 +98,9 @@ services:
       - key: PORT
         value: 8080
       - key: Services__ResumeService
-        value: http://resume-ai-resumes:8080
+        value: https://resume-ai-resumes.onrender.com
       - key: Services__TemplateService
-        value: http://resume-ai-templates:8080
+        value: https://resume-ai-templates.onrender.com
 
   # 🚦 API Gateway (Public Entrance)
   - type: web
@@ -113,19 +113,19 @@ services:
       - key: PORT
         value: 8080
       - key: ReverseProxy__Clusters__auth_cluster__Destinations__destination1__Address
-        value: http://resume-ai-auth:8080
+        value: https://resume-ai-auth.onrender.com
       - key: ReverseProxy__Clusters__resume_cluster__Destinations__destination1__Address
-        value: http://resume-ai-resumes:8080
+        value: https://resume-ai-resumes.onrender.com
       - key: ReverseProxy__Clusters__section_cluster__Destinations__destination1__Address
-        value: http://resume-ai-sections:8080
+        value: https://resume-ai-sections.onrender.com
       - key: ReverseProxy__Clusters__ai_cluster__Destinations__destination1__Address
-        value: http://resume-ai-ai:8080
+        value: https://resume-ai-ai.onrender.com
       - key: ReverseProxy__Clusters__template_cluster__Destinations__destination1__Address
-        value: http://resume-ai-templates:8080
+        value: https://resume-ai-templates.onrender.com
       - key: ReverseProxy__Clusters__export_cluster__Destinations__destination1__Address
-        value: http://resume-ai-export:8080
+        value: https://resume-ai-export.onrender.com
       - key: ReverseProxy__Clusters__job_search_cluster__Destinations__destination1__Address
-        value: http://resume-ai-job-search:8080
+        value: https://resume-ai-job-search.onrender.com
 
   # 🌐 Frontend (React Docker Service)
   - type: web
