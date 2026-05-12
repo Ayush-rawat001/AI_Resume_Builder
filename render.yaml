@@ -1,0 +1,131 @@
+services:
+  # 🔐 Auth Service
+  - type: web
+    name: resume-ai-auth
+    env: docker
+    dockerContext: ./AuthService
+    dockerfilePath: ./AuthService/Dockerfile
+    plan: free
+    envVars:
+      - key: ConnectionStrings__DefaultConnection
+        fromDatabase:
+          name: resume-ai-db # Or your manual connection string
+      - key: Jwt__Key
+        generateValue: true
+      - key: Jwt__Issuer
+        value: ResumeAI
+      - key: Jwt__Audience
+        value: ResumeAIUsers
+
+  # 📄 Resume Service
+  - type: web
+    name: resume-ai-resumes
+    env: docker
+    dockerContext: ./ResumeService
+    dockerfilePath: ./ResumeService/Dockerfile
+    plan: free
+    envVars:
+      - key: ConnectionStrings__DefaultConnection
+        fromDatabase:
+          name: resume-ai-db
+      - key: Services__SectionService
+        value: http://resume-ai-sections:8080 # Internal Render URL
+
+  # 🧩 Section Service
+  - type: web
+    name: resume-ai-sections
+    env: docker
+    dockerContext: ./SectionService
+    dockerfilePath: ./SectionService/Dockerfile
+    plan: free
+    envVars:
+      - key: ConnectionStrings__DefaultConnection
+        fromDatabase:
+          name: resume-ai-db
+
+  # 🤖 AI Service
+  - type: web
+    name: resume-ai-ai
+    env: docker
+    dockerContext: ./AIService
+    dockerfilePath: ./AIService/Dockerfile
+    plan: free
+    envVars:
+      - key: ConnectionStrings__DefaultConnection
+        fromDatabase:
+          name: resume-ai-db
+      - key: Groq__ApiKey
+        sync: false # Set this manually in Render Dashboard
+
+  # 🔎 Job Search Service
+  - type: web
+    name: resume-ai-job-search
+    env: docker
+    dockerContext: ./JobSearchService
+    dockerfilePath: ./JobSearchService/Dockerfile
+    plan: free
+    envVars:
+      - key: ConnectionStrings__DefaultConnection
+        fromDatabase:
+          name: resume-ai-db
+
+  # 🎨 Template Service
+  - type: web
+    name: resume-ai-templates
+    env: docker
+    dockerContext: ./TemplateService
+    dockerfilePath: ./TemplateService/Dockerfile
+    plan: free
+    envVars:
+      - key: ConnectionStrings__DefaultConnection
+        fromDatabase:
+          name: resume-ai-db
+
+  # 📤 Export Service
+  - type: web
+    name: resume-ai-export
+    env: docker
+    dockerContext: ./ExportService
+    dockerfilePath: ./ExportService/Dockerfile
+    plan: free
+    envVars:
+      - key: Services__ResumeService
+        value: http://resume-ai-resumes:8080
+      - key: Services__TemplateService
+        value: http://resume-ai-templates:8080
+
+  # 🚦 API Gateway (Public Entrance)
+  - type: web
+    name: resume-ai-gateway
+    env: docker
+    dockerContext: ./ApiGateway
+    dockerfilePath: ./ApiGateway/Dockerfile
+    plan: free
+    envVars:
+      - key: ReverseProxy__Clusters__auth_cluster__Destinations__destination1__Address
+        value: http://resume-ai-auth:8080
+      - key: ReverseProxy__Clusters__resume_cluster__Destinations__destination1__Address
+        value: http://resume-ai-resumes:8080
+      - key: ReverseProxy__Clusters__section_cluster__Destinations__destination1__Address
+        value: http://resume-ai-sections:8080
+      - key: ReverseProxy__Clusters__ai_cluster__Destinations__destination1__Address
+        value: http://resume-ai-ai:8080
+      - key: ReverseProxy__Clusters__template_cluster__Destinations__destination1__Address
+        value: http://resume-ai-templates:8080
+      - key: ReverseProxy__Clusters__export_cluster__Destinations__destination1__Address
+        value: http://resume-ai-export:8080
+      - key: ReverseProxy__Clusters__job_search_cluster__Destinations__destination1__Address
+        value: http://resume-ai-job-search:8080
+
+  # 🌐 Frontend (React)
+  - type: static
+    name: resume-ai-frontend
+    env: static
+    buildCommand: npm install && npm run build
+    publishPath: ./resumeai-frontend/resumeai/dist
+    envVars:
+      - key: VITE_API_GATEWAY_URL
+        fromService:
+          type: web
+          name: resume-ai-gateway
+          property: host
