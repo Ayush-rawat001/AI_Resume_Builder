@@ -8,8 +8,7 @@ services:
     plan: free
     envVars:
       - key: ConnectionStrings__DefaultConnection
-        fromDatabase:
-          name: resume-ai-db
+        sync: false # You will paste your Neon DB string in the Render Dashboard
       - key: Jwt__Key
         generateValue: true
       - key: Jwt__Issuer
@@ -26,8 +25,7 @@ services:
     plan: free
     envVars:
       - key: ConnectionStrings__DefaultConnection
-        fromDatabase:
-          name: resume-ai-db
+        sync: false
       - key: Services__SectionService
         value: http://resume-ai-sections:8080
 
@@ -40,8 +38,7 @@ services:
     plan: free
     envVars:
       - key: ConnectionStrings__DefaultConnection
-        fromDatabase:
-          name: resume-ai-db
+        sync: false
 
   # 🤖 AI Service
   - type: web
@@ -52,8 +49,7 @@ services:
     plan: free
     envVars:
       - key: ConnectionStrings__DefaultConnection
-        fromDatabase:
-          name: resume-ai-db
+        sync: false
       - key: Groq__ApiKey
         sync: false
 
@@ -66,8 +62,7 @@ services:
     plan: free
     envVars:
       - key: ConnectionStrings__DefaultConnection
-        fromDatabase:
-          name: resume-ai-db
+        sync: false
 
   # 🎨 Template Service
   - type: web
@@ -78,8 +73,7 @@ services:
     plan: free
     envVars:
       - key: ConnectionStrings__DefaultConnection
-        fromDatabase:
-          name: resume-ai-db
+        sync: false
 
   # 📤 Export Service
   - type: web
