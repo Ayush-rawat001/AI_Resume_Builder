@@ -123,3 +123,7 @@ services:
           type: web
           name: resume-ai-gateway
           property: host
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
