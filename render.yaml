@@ -119,10 +119,7 @@ services:
     staticPublishPath: ./resumeai-frontend/resumeai/dist
     envVars:
       - key: VITE_API_GATEWAY_URL
-        fromService:
-          type: web
-          name: resume-ai-gateway
-          property: host
+        value: https://resume-ai-gateway.onrender.com
     routes:
       - type: rewrite
         source: /*
