@@ -6,8 +6,9 @@ services:
     dockerContext: ./AuthService
     dockerfilePath: ./AuthService/Dockerfile
     plan: free
-    port: 8080 # 👈 Explicitly tell Render to look here
     envVars:
+      - key: PORT
+        value: 8080
       - key: ConnectionStrings__DefaultConnection
         sync: false
       - key: Jwt__Key
@@ -24,8 +25,9 @@ services:
     dockerContext: ./ResumeService
     dockerfilePath: ./ResumeService/Dockerfile
     plan: free
-    port: 8080
     envVars:
+      - key: PORT
+        value: 8080
       - key: ConnectionStrings__DefaultConnection
         sync: false
       - key: Services__SectionService
@@ -38,8 +40,9 @@ services:
     dockerContext: ./SectionService
     dockerfilePath: ./SectionService/Dockerfile
     plan: free
-    port: 8080
     envVars:
+      - key: PORT
+        value: 8080
       - key: ConnectionStrings__DefaultConnection
         sync: false
 
@@ -50,8 +53,9 @@ services:
     dockerContext: ./AIService
     dockerfilePath: ./AIService/Dockerfile
     plan: free
-    port: 8080
     envVars:
+      - key: PORT
+        value: 8080
       - key: ConnectionStrings__DefaultConnection
         sync: false
       - key: Groq__ApiKey
@@ -64,8 +68,9 @@ services:
     dockerContext: ./JobSearchService
     dockerfilePath: ./JobSearchService/Dockerfile
     plan: free
-    port: 8080
     envVars:
+      - key: PORT
+        value: 8080
       - key: ConnectionStrings__DefaultConnection
         sync: false
 
@@ -76,8 +81,9 @@ services:
     dockerContext: ./TemplateService
     dockerfilePath: ./TemplateService/Dockerfile
     plan: free
-    port: 8080
     envVars:
+      - key: PORT
+        value: 8080
       - key: ConnectionStrings__DefaultConnection
         sync: false
 
@@ -88,8 +94,9 @@ services:
     dockerContext: ./ExportService
     dockerfilePath: ./ExportService/Dockerfile
     plan: free
-    port: 8080
     envVars:
+      - key: PORT
+        value: 8080
       - key: Services__ResumeService
         value: http://resume-ai-resumes:8080
       - key: Services__TemplateService
@@ -102,8 +109,9 @@ services:
     dockerContext: ./ApiGateway
     dockerfilePath: ./ApiGateway/Dockerfile
     plan: free
-    port: 8080
     envVars:
+      - key: PORT
+        value: 8080
       - key: ReverseProxy__Clusters__auth_cluster__Destinations__destination1__Address
         value: http://resume-ai-auth:8080
       - key: ReverseProxy__Clusters__resume_cluster__Destinations__destination1__Address
@@ -119,12 +127,12 @@ services:
       - key: ReverseProxy__Clusters__job_search_cluster__Destinations__destination1__Address
         value: http://resume-ai-job-search:8080
 
-# 🌐 Frontend (React Static Site Section)
-static_sites:
-  - name: resume-ai-frontend
+  # 🌐 Frontend (React Static Site)
+  - type: web
+    name: resume-ai-frontend
     env: static
     buildCommand: cd resumeai-frontend/resumeai && npm install && npm run build
-    publishPath: ./resumeai-frontend/resumeai/dist
+    staticPublishPath: ./resumeai-frontend/resumeai/dist
     envVars:
       - key: VITE_API_GATEWAY_URL
         value: https://resume-ai-gateway.onrender.com
