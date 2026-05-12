@@ -115,7 +115,7 @@ services:
   - type: web
     name: resume-ai-frontend
     env: static
-    buildCommand: npm install && npm run build
+    buildCommand: cd resumeai-frontend/resumeai && npm install && npm run build
     staticPublishPath: ./resumeai-frontend/resumeai/dist
     envVars:
       - key: VITE_API_GATEWAY_URL
