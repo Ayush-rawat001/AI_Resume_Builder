@@ -14,7 +14,7 @@ namespace AIService.Providers
         public GroqProvider(HttpClient httpClient, IConfiguration configuration, ILogger<GroqProvider> logger)
         {
             _httpClient = httpClient;
-            _apiKey = configuration["Groq:ApiKey"] ?? throw new ArgumentNullException("Groq ApiKey is missing");
+            _apiKey = configuration["Groq:ApiKey"]?.Trim() ?? throw new ArgumentNullException("Groq ApiKey is missing");
             _logger = logger;
         }
 
