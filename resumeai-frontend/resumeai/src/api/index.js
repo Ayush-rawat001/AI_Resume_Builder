@@ -13,7 +13,7 @@ export const SERVICES = {
   section:   'https://resume-ai-sections.onrender.com',
   template:  'https://resume-ai-templates.onrender.com',
   ai:        'https://resume-ai-ai.onrender.com',
-  export:    'https://resume-ai-export.onrender.com',
+  export:    'https://resume-ai-export-oo6m.onrender.com',
   jobSearch: 'https://resume-ai-job-search.onrender.com',
 }
 
