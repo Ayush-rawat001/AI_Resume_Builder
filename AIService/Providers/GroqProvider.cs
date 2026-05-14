@@ -45,7 +45,7 @@ namespace AIService.Providers
                 {
                     var errorJson = await response.Content.ReadAsStringAsync();
                     _logger.LogError("Groq API Error Response: {Error}", errorJson);
-                    throw new Exception($"AI Generation failed: {response.StatusCode}");
+                    throw new Exception($"HTTP {response.StatusCode}: {errorJson}");
                 }
 
                 var responseJson = await response.Content.ReadAsStringAsync();
@@ -56,7 +56,7 @@ namespace AIService.Providers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Groq API Error");
-                throw new Exception("AI Generation failed. Please try again later.");
+                throw new Exception($"Groq API Error: {ex.Message}");
             }
         }
 

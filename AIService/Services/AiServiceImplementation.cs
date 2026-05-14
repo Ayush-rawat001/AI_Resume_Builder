@@ -141,7 +141,7 @@ namespace AIService.Services
                 aiRequest.Status = "FAILED";
                 await _repository.SaveChanges();
                 _logger.LogError(ex, "AI generation failed for type={Type}", type);
-                return ApiResponse<string>.Fail("AI generation failed.");
+                return ApiResponse<string>.Fail(ex.Message);
             }
         }
 

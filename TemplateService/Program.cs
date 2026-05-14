@@ -80,18 +80,20 @@ builder.Services.AddSwaggerGen(c =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.UseSwagger();
-app.UseSwaggerUI();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+// app.UseHttpsRedirection();
 
 app.UseCors("AllowAll");
+
+// Use Authentication & Authorization
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapControllers();
 
-using (var scope = app.Services.CreateScope())
-{
-    var context = scope.ServiceProvider.GetRequiredService<TemplateDbContext>();
-    context.Database.EnsureCreated();
-}
+app.MapControllers();
 
 app.Run();
