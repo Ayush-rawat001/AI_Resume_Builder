@@ -8,13 +8,13 @@ const GATEWAY_URL = import.meta.env.VITE_API_GATEWAY_URL ||
                     (isRender ? 'https://resume-ai-gateway.onrender.com' : 'http://localhost:4000');
 
 export const SERVICES = {
-  auth:      GATEWAY_URL,
-  resume:    GATEWAY_URL,
-  section:   GATEWAY_URL,
-  template:  GATEWAY_URL,
-  ai:        GATEWAY_URL,
-  export:    GATEWAY_URL,
-  jobSearch: GATEWAY_URL,
+  auth:      'https://resume-ai-auth.onrender.com',
+  resume:    'https://resume-ai-resumes.onrender.com',
+  section:   'https://resume-ai-sections.onrender.com',
+  template:  'https://resume-ai-templates.onrender.com',
+  ai:        'https://resume-ai-ai.onrender.com',
+  export:    'https://resume-ai-export.onrender.com',
+  jobSearch: 'https://resume-ai-job-search.onrender.com',
 }
 
 
