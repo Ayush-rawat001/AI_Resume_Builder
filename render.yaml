@@ -159,7 +159,7 @@ services:
       - key: ReverseProxy__Clusters__template_cluster__Destinations__destination1__Address
         value: https://resume-ai-templates.onrender.com
       - key: ReverseProxy__Clusters__export_cluster__Destinations__destination1__Address
-        value: https://resume-ai-export.onrender.com
+        value: https://resume-ai-export-oo6m.onrender.com
       - key: ReverseProxy__Clusters__job_search_cluster__Destinations__destination1__Address
         value: https://resume-ai-job-search.onrender.com
 
