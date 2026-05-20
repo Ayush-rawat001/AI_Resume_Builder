@@ -1,4 +1,4 @@
-import { useEffect, useRef, useMemo } from 'react'
+﻿import { useEffect, useRef, useMemo } from 'react'
 import { useResumeStore, useTemplateStore } from '../../store'
 import { injectDataIntoTemplate } from '../../utils/sections'
 
@@ -34,7 +34,7 @@ export default function LivePreview() {
         <div className="flex items-center gap-2">
           <div className="flex gap-1.5">
             <div className="w-2.5 h-2.5 rounded-full bg-rose-500/60" />
-            <div className="w-2.5 h-2.5 rounded-full bg-gold-500/60" />
+            <div className="w-2.5 h-2.5 rounded-full bg-jade-500/60" />
             <div className="w-2.5 h-2.5 rounded-full bg-jade-500/60" />
           </div>
           <span className="text-xs text-ink-400 ml-2 font-mono">preview.html</span>

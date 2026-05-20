@@ -4,14 +4,14 @@
 
 @layer base {
   :root {
-    --color-bg: #0a0a1a;
-    --color-surface: #131327;
-    --color-surface-2: #1a1a33;
-    --color-border: #2a2a4a;
-    --color-text: #e8e8f0;
-    --color-text-muted: #7070a0;
-    --color-accent: #e8b422;
-    --color-accent-2: #22c76a;
+    --color-bg: #fafaf8;
+    --color-surface: #ffffff;
+    --color-surface-2: #f4f3ef;
+    --color-border: #e8e4dd;
+    --color-text: #1a1714;
+    --color-text-muted: #6b6460;
+    --color-accent: #f97316;
+    --color-accent-2: #ea6800;
   }
 
   * {
@@ -32,46 +32,46 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: var(--color-surface);
+    background: #f0ede8;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #3a3a6a;
+    background: #d4cfc8;
     border-radius: 3px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #5a5a9a;
+    background: #f97316;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-gold-500 hover:bg-gold-400 text-ink-900 font-semibold px-5 py-2.5 rounded-lg transition-all duration-200 text-sm tracking-wide;
+    @apply bg-orange-500 hover:bg-orange-400 text-white font-semibold px-5 py-2.5 rounded-lg transition-all duration-200 text-sm tracking-wide shadow-sm;
   }
 
   .btn-secondary {
-    @apply border border-ink-600 hover:border-ink-400 text-ink-200 hover:text-white font-medium px-5 py-2.5 rounded-lg transition-all duration-200 text-sm;
+    @apply border border-stone-300 hover:border-stone-400 text-stone-600 hover:text-stone-900 font-medium px-5 py-2.5 rounded-lg transition-all duration-200 text-sm bg-white hover:bg-stone-50;
   }
 
   .btn-ghost {
-    @apply hover:bg-ink-700 text-ink-300 hover:text-white font-medium px-4 py-2 rounded-lg transition-all duration-200 text-sm;
+    @apply hover:bg-stone-100 text-stone-500 hover:text-stone-900 font-medium px-4 py-2 rounded-lg transition-all duration-200 text-sm;
   }
 
   .btn-danger {
-    @apply bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 hover:border-rose-500/40 font-medium px-4 py-2 rounded-lg transition-all duration-200 text-sm;
+    @apply bg-rose-50 hover:bg-rose-100 text-rose-500 border border-rose-200 hover:border-rose-300 font-medium px-4 py-2 rounded-lg transition-all duration-200 text-sm;
   }
 
   .card {
-    @apply bg-ink-800/60 border border-ink-700/60 rounded-xl backdrop-blur-sm;
+    @apply bg-white border border-stone-200/80 rounded-xl shadow-sm;
   }
 
   .input-field {
-    @apply w-full bg-ink-800/80 border border-ink-600 focus:border-gold-500/60 focus:ring-1 focus:ring-gold-500/20 outline-none text-ink-100 placeholder-ink-400 rounded-lg px-4 py-2.5 text-sm transition-all duration-200;
+    @apply w-full bg-white border border-stone-300 focus:border-orange-400 focus:ring-2 focus:ring-orange-100 outline-none text-stone-800 placeholder-stone-400 rounded-lg px-4 py-2.5 text-sm transition-all duration-200;
   }
 
   .label {
-    @apply text-xs font-medium text-ink-300 uppercase tracking-widest mb-1.5 block;
+    @apply text-xs font-medium text-stone-500 uppercase tracking-widest mb-1.5 block;
   }
 
   .section-pill {
@@ -79,7 +79,7 @@
   }
 
   .glass-panel {
-    @apply bg-ink-800/40 backdrop-blur-xl border border-ink-700/40 rounded-2xl;
+    @apply bg-white/80 backdrop-blur-xl border border-stone-200 rounded-2xl shadow-sm;
   }
 }
 
@@ -114,7 +114,7 @@
 }
 
 .skeleton {
-  background: linear-gradient(90deg, #1a1a33 25%, #222244 50%, #1a1a33 75%);
+  background: linear-gradient(90deg, #f0ede8 25%, #e8e4dd 50%, #f0ede8 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
   border-radius: 6px;
@@ -122,7 +122,7 @@
 
 /* Tooltip */
 .tooltip {
-  @apply absolute z-50 px-2 py-1 text-xs bg-ink-700 text-ink-100 rounded-md shadow-lg pointer-events-none whitespace-nowrap;
+  @apply absolute z-50 px-2 py-1 text-xs bg-stone-800 text-white rounded-md shadow-lg pointer-events-none whitespace-nowrap;
 }
 
 /* Toast override */
@@ -133,7 +133,7 @@
 /* Custom prose for AI content */
 .ai-output {
   line-height: 1.7;
-  color: #c0c0e0;
+  color: #44403c;
 }
 
 /* Stagger children animations */

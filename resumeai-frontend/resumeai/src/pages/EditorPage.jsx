@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useRef } from 'react'
+﻿import { useEffect, useState, useCallback, useRef } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import {
   DndContext, closestCenter, KeyboardSensor, PointerSensor,
@@ -240,7 +240,7 @@ export default function EditorPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-ink-900 flex items-center justify-center gap-3 text-ink-400">
+      <div className="min-h-screen bg-stone-50 flex items-center justify-center gap-3 text-stone-400">
         <Loader2 size={20} className="animate-spin" />
         <span className="text-sm">Loading editor…</span>
       </div>
@@ -248,26 +248,26 @@ export default function EditorPage() {
   }
 
   return (
-    <div className="min-h-screen bg-ink-900 flex flex-col">
+    <div className="min-h-screen bg-stone-50 flex flex-col">
       {/* ─── Top bar ─────────────────────────────────────────────────────── */}
-      <header className="h-14 flex items-center px-4 gap-3 border-b border-ink-700/60 bg-ink-800/80 backdrop-blur-sm shrink-0 z-20">
+      <header className="h-14 flex items-center px-4 gap-3 border-b border-stone-200 bg-white/90 backdrop-blur-sm shrink-0 z-20">
         {/* Back */}
         <Link
           to="/dashboard"
-          className="flex items-center gap-1.5 text-ink-400 hover:text-white transition-colors mr-2 group"
+          className="flex items-center gap-1.5 text-stone-400 hover:text-stone-900 transition-colors mr-2 group"
         >
           <ArrowLeft size={16} className="group-hover:-translate-x-0.5 transition-transform" />
           <span className="text-sm hidden sm:block">Dashboard</span>
         </Link>
 
-        <div className="w-px h-5 bg-ink-700/60" />
+        <div className="w-px h-5 bg-stone-100" />
 
         {/* Resume title */}
         <div className="flex-1 min-w-0">
-          <h1 className="text-sm font-semibold text-white truncate">
+          <h1 className="text-sm font-semibold text-stone-900 truncate">
             {currentResume?.title || 'Untitled Resume'}
           </h1>
-          <p className="text-[11px] text-ink-500 hidden sm:block">
+          <p className="text-[11px] text-stone-400 hidden sm:block">
             {currentResume?.targetJobTitle || 'No job title set'}
           </p>
         </div>
@@ -275,20 +275,20 @@ export default function EditorPage() {
         {/* Status */}
         <div className="flex items-center gap-2">
           {isDirty && !saving && (
-            <div className="flex items-center gap-1.5 text-[11px] text-gold-400/70">
-              <div className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse" />
+            <div className="flex items-center gap-1.5 text-[11px] text-orange-500/70">
+              <div className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
               <span className="hidden sm:block">Unsaved</span>
             </div>
           )}
           {saving && (
-            <div className="flex items-center gap-1.5 text-[11px] text-ink-400">
+            <div className="flex items-center gap-1.5 text-[11px] text-stone-400">
               <Loader2 size={11} className="animate-spin" />
               <span className="hidden sm:block">Saving…</span>
             </div>
           )}
           {!isDirty && !saving && (
-            <div className="flex items-center gap-1.5 text-[11px] text-jade-400/70 hidden sm:flex">
-              <div className="w-1.5 h-1.5 rounded-full bg-jade-400" />
+            <div className="flex items-center gap-1.5 text-[11px] text-orange-500/70 hidden sm:flex">
+              <div className="w-1.5 h-1.5 rounded-full bg-orange-400" />
               <span>Saved</span>
             </div>
           )}
@@ -326,7 +326,7 @@ export default function EditorPage() {
           {!currentResume?.isPublic && (
             <button
               onClick={handlePublish}
-              className="btn-ghost flex items-center gap-1.5 text-xs text-jade-400 hover:bg-jade-400/10"
+              className="btn-ghost flex items-center gap-1.5 text-xs text-orange-500 hover:bg-orange-50"
             >
               <Globe size={14} />
               <span className="hidden sm:block">Publish</span>
@@ -347,24 +347,24 @@ export default function EditorPage() {
       {/* ─── Editor body ──────────────────────────────────────────────────── */}
       <div className="flex flex-1 overflow-hidden">
         {/* LEFT — Sections panel */}
-        <aside className={`flex flex-col border-r border-ink-700/60 bg-ink-800/30 overflow-hidden transition-all duration-300 ${showPreview ? 'w-[420px]' : 'flex-1'}`}>
+        <aside className={`flex flex-col border-r border-stone-200 bg-white/60 overflow-hidden transition-all duration-300 ${showPreview ? 'w-[420px]' : 'flex-1'}`}>
           {/* Panel header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-ink-700/60 shrink-0">
-            <span className="text-sm font-semibold text-ink-200">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-stone-200 shrink-0">
+            <span className="text-sm font-semibold text-stone-700">
               Sections
-              <span className="ml-2 text-xs font-normal text-ink-500">({sections.length})</span>
+              <span className="ml-2 text-xs font-normal text-stone-400">({sections.length})</span>
             </span>
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setAiTarget({ sectionId: null, sectionType: 'SUMMARY', title: 'AI Assistant' })}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-gold-400 bg-gold-400/10 hover:bg-gold-400/20 border border-gold-400/20 rounded-lg transition-all"
+                className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-orange-500 bg-orange-50 hover:bg-orange-100 border border-orange-200 rounded-lg transition-all"
               >
                 <Sparkles size={12} />
                 AI
               </button>
               <button
                 onClick={() => setShowAddSection(true)}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-white bg-ink-700/60 hover:bg-ink-700 border border-ink-600/60 rounded-lg transition-all"
+                className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-stone-900 bg-stone-100 hover:bg-stone-100 border border-stone-300/60 rounded-lg transition-all"
               >
                 <Plus size={12} />
                 Add
@@ -376,8 +376,8 @@ export default function EditorPage() {
           <div className="flex-1 overflow-y-auto p-3 space-y-2">
             {sections.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-center py-12 px-4">
-                <AlertCircle size={24} className="text-ink-600 mb-3" />
-                <p className="text-sm text-ink-400 mb-4">No sections yet.<br />Add your first section to get started.</p>
+                <AlertCircle size={24} className="text-stone-300 mb-3" />
+                <p className="text-sm text-stone-400 mb-4">No sections yet.<br />Add your first section to get started.</p>
                 <button onClick={() => setShowAddSection(true)} className="btn-primary flex items-center gap-2 text-sm">
                   <Plus size={14} /> Add Section
                 </button>
@@ -409,8 +409,8 @@ export default function EditorPage() {
 
           {/* Drag tip */}
           {sections.length > 1 && (
-            <div className="px-4 py-2.5 border-t border-ink-700/40 shrink-0">
-              <p className="text-[11px] text-ink-600 text-center">
+            <div className="px-4 py-2.5 border-t border-stone-200/60 shrink-0">
+              <p className="text-[11px] text-stone-300 text-center">
                 ⠿ Drag sections to reorder · Double-click title to rename
               </p>
             </div>

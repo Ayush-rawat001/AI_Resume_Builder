@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+﻿import { useState, useRef, useEffect } from 'react'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import {
@@ -47,7 +47,7 @@ export default function SectionCard({ section, onUpdate, onDelete, onAiRequest }
       ref={setNodeRef}
       style={style}
       className={`card border transition-all duration-200 ${
-        isActive ? 'border-gold-500/40 shadow-lg shadow-gold-500/5' : 'border-ink-700/60 hover:border-ink-600/80'
+        isActive ? 'border-orange-300 shadow-lg shadow-orange-200/5' : 'border-stone-200 hover:border-stone-300/80'
       } ${isDragging ? 'shadow-2xl shadow-black/40' : ''}`}
     >
       {/* Card header */}
@@ -62,7 +62,7 @@ export default function SectionCard({ section, onUpdate, onDelete, onAiRequest }
         <div
           {...attributes}
           {...listeners}
-          className="drag-handle text-ink-600 hover:text-ink-400 transition-colors p-1"
+          className="drag-handle text-stone-300 hover:text-stone-400 transition-colors p-1"
           onClick={e => e.stopPropagation()}
         >
           <GripVertical size={15} />
@@ -83,12 +83,12 @@ export default function SectionCard({ section, onUpdate, onDelete, onAiRequest }
               onChange={e => setLocalTitle(e.target.value)}
               onKeyDown={e => { if (e.key === 'Enter') handleTitleSave(); if (e.key === 'Escape') { setEditingTitle(false); setLocalTitle(section.title) } }}
             />
-            <button onClick={handleTitleSave} className="text-jade-400 hover:text-jade-300 p-1"><Check size={13} /></button>
+            <button onClick={handleTitleSave} className="text-orange-500 hover:text-jade-300 p-1"><Check size={13} /></button>
             <button onClick={() => { setEditingTitle(false); setLocalTitle(section.title) }} className="text-rose-400 hover:text-rose-300 p-1"><X size={13} /></button>
           </div>
         ) : (
           <span
-            className="flex-1 text-sm text-ink-200 truncate hover:text-white transition-colors cursor-pointer"
+            className="flex-1 text-sm text-stone-700 truncate hover:text-stone-900 transition-colors cursor-pointer"
             onDoubleClick={(e) => { e.stopPropagation(); setEditingTitle(true) }}
             title="Double-click to rename"
           >
@@ -101,7 +101,7 @@ export default function SectionCard({ section, onUpdate, onDelete, onAiRequest }
           {showAi && (
             <button
               onClick={() => onAiRequest(section)}
-              className="p-1.5 text-ink-500 hover:text-gold-400 transition-colors rounded-lg hover:bg-gold-400/10"
+              className="p-1.5 text-stone-400 hover:text-orange-500 transition-colors rounded-lg hover:bg-orange-50"
               title="Generate with AI"
             >
               <Sparkles size={13} />
@@ -109,12 +109,12 @@ export default function SectionCard({ section, onUpdate, onDelete, onAiRequest }
           )}
           <button
             onClick={() => onDelete(section.sectionId)}
-            className="p-1.5 text-ink-500 hover:text-rose-400 transition-colors rounded-lg hover:bg-rose-400/10"
+            className="p-1.5 text-stone-400 hover:text-rose-400 transition-colors rounded-lg hover:bg-rose-400/10"
             title="Delete section"
           >
             <Trash2 size={13} />
           </button>
-          <div className="text-ink-500 p-1">
+          <div className="text-stone-400 p-1">
             {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
           </div>
         </div>
@@ -122,7 +122,7 @@ export default function SectionCard({ section, onUpdate, onDelete, onAiRequest }
 
       {/* Expandable editor */}
       {expanded && (
-        <div className="px-3 pb-3 border-t border-ink-700/40 pt-3 animate-fade-in">
+        <div className="px-3 pb-3 border-t border-stone-100 pt-3 animate-fade-in">
           <SectionContentEditor
             sectionType={section.sectionType}
             content={section.content}

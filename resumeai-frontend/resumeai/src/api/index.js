@@ -8,13 +8,13 @@ const GATEWAY_URL = import.meta.env.VITE_API_GATEWAY_URL ||
                     (isRender ? 'https://resume-ai-gateway.onrender.com' : 'http://localhost:4000');
 
 export const SERVICES = {
-  auth:      'https://resume-ai-auth.onrender.com',
-  resume:    'https://resume-ai-resumes.onrender.com',
-  section:   'https://resume-ai-sections.onrender.com',
-  template:  'https://resume-ai-templates.onrender.com',
-  ai:        'https://resume-ai-ai.onrender.com',
-  export:    'https://resume-ai-export-oo6m.onrender.com',
-  jobSearch: 'https://resume-ai-job-search.onrender.com',
+  auth:      GATEWAY_URL,
+  resume:    GATEWAY_URL,
+  section:   GATEWAY_URL,
+  template:  GATEWAY_URL,
+  ai:        GATEWAY_URL,
+  export:    GATEWAY_URL,
+  jobSearch: GATEWAY_URL,
 }
 
 
@@ -70,7 +70,6 @@ export const authApi = {
   login:    (body) => authClient.post('/api/auth/login', body).then(unwrap),
   profile:  (id)   => authClient.get(`/api/auth/profile/${id}`).then(unwrap),
   updateProfile: (id, body) => authClient.put(`/api/auth/profile/${id}`, body).then(unwrap),
-  changePassword: (id, body) => authClient.put(`/api/auth/password/${id}`, body).then(unwrap),
   upgrade: () => authClient.post('/api/auth/upgrade').then(unwrap),
   
   // Admin-only Auth
@@ -85,15 +84,11 @@ export const authApi = {
 // ─── Resume API ───────────────────────────────────────────────────────────────
 export const resumeApi = {
   create:  (body)   => resumeClient.post('/api/resumes', body).then(unwrap),
-  duplicate: (id)   => resumeClient.post(`/api/resumes/duplicate/${id}`).then(unwrap),
   get:     (id)     => resumeClient.get(`/api/resumes/${id}`).then(unwrap),
   getByUser: (uid)  => resumeClient.get(`/api/resumes/user/${uid}`).then(unwrap),
   update:  (id, body) => resumeClient.put(`/api/resumes/${id}`, body).then(unwrap),
   publish: (id)     => resumeClient.put(`/api/resumes/publish/${id}`).then(unwrap),
-  unpublish: (id)   => resumeClient.put(`/api/resumes/unpublish/${id}`).then(unwrap),
   delete:  (id)     => resumeClient.delete(`/api/resumes/${id}`).then(unwrap),
-  updateAts: (id, score) => resumeClient.put(`/api/resumes/ats/${id}?score=${score}`).then(unwrap),
-  incrementView: (id) => resumeClient.put(`/api/resumes/view/${id}`).then(unwrap),
 
   // Admin-only Resume
   getAdminAnalytics: () => resumeClient.get('/api/resumes/admin/analytics').then(unwrap),
@@ -108,7 +103,6 @@ export const sectionApi = {
   delete:  (id)             => sectionClient.delete(`/api/sections/${id}`).then(unwrap),
   reorder: (resumeId, ids)  => sectionClient.put(`/api/sections/reorder/${resumeId}`, ids).then(unwrap),
   bulkUpdate: (resumeId, sections) => sectionClient.put(`/api/sections/bulk/${resumeId}`, sections).then(unwrap),
-  toggleVisibility: (id)    => sectionClient.put(`/api/sections/toggle/${id}`).then(unwrap),
 }
 
 // ─── Template API ─────────────────────────────────────────────────────────────
@@ -116,9 +110,6 @@ export const templateApi = {
   list: ()   => templateClient.get('/api/templates').then(unwrap),
   listAdmin: () => templateClient.get('/api/templates/admin/all').then(unwrap),
   get:  (id) => templateClient.get(`/api/templates/${id}`).then(unwrap),
-  getByCategory: (cat) => templateClient.get(`/api/templates/category/${cat}`).then(unwrap),
-  getPopular: () => templateClient.get('/api/templates/popular').then(unwrap),
-  incrementUsage: (id) => templateClient.put(`/api/templates/use/${id}`).then(unwrap),
   
   // Admin-only Template
   create: (body)     => templateClient.post('/api/templates', body).then(unwrap),
@@ -132,7 +123,6 @@ export const aiApi = {
   generateBullets: (body) => aiClient.post('/api/ai/generate-bullets', body).then(unwrap),
   improve:         (body) => aiClient.post('/api/ai/improve-section', body).then(unwrap),
   checkAts:        (body) => aiClient.post('/api/ai/check-ats', body).then(unwrap),
-  suggestSkills:   (body) => aiClient.post('/api/ai/suggest-skills', body).then(unwrap),
   history:         ()     => aiClient.get('/api/ai/history').then(unwrap),
   quota:           ()     => aiClient.get('/api/ai/quota').then(unwrap),
 

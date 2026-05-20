@@ -228,7 +228,7 @@ export default function AdminPage() {
           {activeTab === 'templates' && (
             <div className="animate-in slide-in-from-bottom-4">
               <div className="flex justify-end mb-6">
-                <button onClick={() => { setEditingTemplate(null); setTemplateForm({ name: '', description: '', category: 'Professional', isPremium: false, htmlLayout: '', cssStyles: '', thumbnailUrl: '' }); setShowTemplateModal(true); }} className="bg-primary text-white px-6 py-2 rounded-xl font-semibold flex items-center gap-2 hover:shadow-lg transition-all">
+                <button onClick={() => { setEditingTemplate(null); setTemplateForm({ name: '', description: '', category: 'Professional', isPremium: false, htmlLayout: '', cssStyles: '', thumbnailUrl: '' }); setShowTemplateModal(true); }} className="bg-primary text-stone-900 px-6 py-2 rounded-xl font-semibold flex items-center gap-2 hover:shadow-lg transition-all">
                   <Plus className="w-5 h-5" /> Add New Template
                 </button>
               </div>
@@ -237,7 +237,7 @@ export default function AdminPage() {
                   <div key={t.templateId} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-all group">
                     <div className="h-48 bg-slate-100 relative overflow-hidden">
                       <img src={t.thumbnailUrl || 'https://via.placeholder.com/300x400?text=No+Preview'} className="w-full h-full object-cover" />
-                      {!t.isActive && <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px] flex items-center justify-center text-white font-bold">DEACTIVATED</div>}
+                      {!t.isActive && <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px] flex items-center justify-center text-stone-900 font-bold">DEACTIVATED</div>}
                     </div>
                     <div className="p-4 flex items-center justify-between">
                       <div>
@@ -320,7 +320,7 @@ export default function AdminPage() {
               </div>
               <div className="flex justify-end gap-4 pt-4">
                 <button type="button" onClick={() => setShowTemplateModal(false)} className="px-8 py-3 rounded-2xl font-bold text-slate-600 hover:bg-slate-100 transition-colors">Cancel</button>
-                <button type="submit" className="px-10 py-3 bg-primary text-white rounded-2xl font-bold hover:shadow-lg hover:scale-[1.02] transition-all">Save Template</button>
+                <button type="submit" className="px-10 py-3 bg-primary text-stone-900 rounded-2xl font-bold hover:shadow-lg hover:scale-[1.02] transition-all">Save Template</button>
               </div>
             </form>
           </div>

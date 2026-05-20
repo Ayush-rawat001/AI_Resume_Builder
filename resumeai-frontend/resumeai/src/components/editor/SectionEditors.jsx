@@ -33,11 +33,11 @@ export function ExperienceEditor({ content, onChange }) {
   return (
     <div className="space-y-4">
       {items.map((item, idx) => (
-        <div key={idx} className="bg-ink-700/30 border border-ink-600/40 rounded-xl p-4 space-y-3">
+        <div key={idx} className="bg-stone-50 border border-stone-300/40 rounded-xl p-4 space-y-3">
           <div className="flex items-center justify-between mb-1">
-            <span className="text-xs text-ink-400 font-medium">Position {idx + 1}</span>
+            <span className="text-xs text-stone-400 font-medium">Position {idx + 1}</span>
             {items.length > 1 && (
-              <button onClick={() => remove(idx)} className="text-ink-500 hover:text-rose-400 transition-colors">
+              <button onClick={() => remove(idx)} className="text-stone-400 hover:text-rose-400 transition-colors">
                 <Trash2 size={13} />
               </button>
             )}
@@ -62,7 +62,7 @@ export function ExperienceEditor({ content, onChange }) {
           </div>
         </div>
       ))}
-      <button onClick={add} className="w-full btn-ghost border border-dashed border-ink-600 hover:border-ink-400 flex items-center justify-center gap-2 py-2.5">
+      <button onClick={add} className="w-full btn-ghost border border-dashed border-stone-300 hover:border-ink-400 flex items-center justify-center gap-2 py-2.5">
         <Plus size={14} /> Add Position
       </button>
     </div>
@@ -80,11 +80,11 @@ export function EducationEditor({ content, onChange }) {
   return (
     <div className="space-y-4">
       {items.map((item, idx) => (
-        <div key={idx} className="bg-ink-700/30 border border-ink-600/40 rounded-xl p-4 space-y-3">
+        <div key={idx} className="bg-stone-50 border border-stone-300/40 rounded-xl p-4 space-y-3">
           <div className="flex justify-between mb-1">
-            <span className="text-xs text-ink-400 font-medium">Entry {idx + 1}</span>
+            <span className="text-xs text-stone-400 font-medium">Entry {idx + 1}</span>
             {items.length > 1 && (
-              <button onClick={() => remove(idx)} className="text-ink-500 hover:text-rose-400 transition-colors">
+              <button onClick={() => remove(idx)} className="text-stone-400 hover:text-rose-400 transition-colors">
                 <Trash2 size={13} />
               </button>
             )}
@@ -105,7 +105,7 @@ export function EducationEditor({ content, onChange }) {
           </div>
         </div>
       ))}
-      <button onClick={add} className="w-full btn-ghost border border-dashed border-ink-600 hover:border-ink-400 flex items-center justify-center gap-2 py-2.5">
+      <button onClick={add} className="w-full btn-ghost border border-dashed border-stone-300 hover:border-ink-400 flex items-center justify-center gap-2 py-2.5">
         <Plus size={14} /> Add Education
       </button>
     </div>
@@ -147,7 +147,7 @@ export function SkillsEditor({ content, onChange }) {
         {skills.map(s => (
           <span
             key={s}
-            className="flex items-center gap-1.5 bg-ink-700/60 border border-ink-600 text-ink-200 text-xs px-3 py-1 rounded-full"
+            className="flex items-center gap-1.5 bg-stone-100 border border-stone-300 text-stone-700 text-xs px-3 py-1 rounded-full"
           >
             {s}
             <button onClick={() => remove(s)} className="hover:text-rose-400 transition-colors">
@@ -156,7 +156,7 @@ export function SkillsEditor({ content, onChange }) {
           </span>
         ))}
         {skills.length === 0 && (
-          <p className="text-xs text-ink-500">No skills added yet. Type a skill and press Enter.</p>
+          <p className="text-xs text-stone-400">No skills added yet. Type a skill and press Enter.</p>
         )}
       </div>
     </div>
@@ -173,18 +173,18 @@ export function CertificationsEditor({ content, onChange }) {
   return (
     <div className="space-y-3">
       {items.map((item, idx) => (
-        <div key={idx} className="bg-ink-700/30 border border-ink-600/40 rounded-xl p-3 space-y-2">
+        <div key={idx} className="bg-stone-50 border border-stone-300/40 rounded-xl p-3 space-y-2">
           <div className="flex justify-between">
-            <span className="text-xs text-ink-400">Cert {idx + 1}</span>
+            <span className="text-xs text-stone-400">Cert {idx + 1}</span>
             {items.length > 1 && (
-              <button onClick={() => remove(idx)} className="text-ink-500 hover:text-rose-400 transition-colors"><Trash2 size={13} /></button>
+              <button onClick={() => remove(idx)} className="text-stone-400 hover:text-rose-400 transition-colors"><Trash2 size={13} /></button>
             )}
           </div>
           <input className="input-field" placeholder="Certification Title" value={item.title} onChange={e => update(idx, 'title', e.target.value)} />
           <input className="input-field" placeholder="Issuing Organization" value={item.issuer} onChange={e => update(idx, 'issuer', e.target.value)} />
         </div>
       ))}
-      <button onClick={add} className="w-full btn-ghost border border-dashed border-ink-600 hover:border-ink-400 flex items-center justify-center gap-2 py-2">
+      <button onClick={add} className="w-full btn-ghost border border-dashed border-stone-300 hover:border-ink-400 flex items-center justify-center gap-2 py-2">
         <Plus size={14} /> Add Certification
       </button>
     </div>
@@ -201,11 +201,11 @@ export function ProjectsEditor({ content, onChange }) {
   return (
     <div className="space-y-4">
       {items.map((item, idx) => (
-        <div key={idx} className="bg-ink-700/30 border border-ink-600/40 rounded-xl p-4 space-y-3">
+        <div key={idx} className="bg-stone-50 border border-stone-300/40 rounded-xl p-4 space-y-3">
           <div className="flex justify-between">
-            <span className="text-xs text-ink-400">Project {idx + 1}</span>
+            <span className="text-xs text-stone-400">Project {idx + 1}</span>
             {items.length > 1 && (
-              <button onClick={() => remove(idx)} className="text-ink-500 hover:text-rose-400 transition-colors"><Trash2 size={13} /></button>
+              <button onClick={() => remove(idx)} className="text-stone-400 hover:text-rose-400 transition-colors"><Trash2 size={13} /></button>
             )}
           </div>
           <input className="input-field" placeholder="Project Name" value={item.title} onChange={e => update(idx, 'title', e.target.value)} />
@@ -213,7 +213,7 @@ export function ProjectsEditor({ content, onChange }) {
           <textarea className="input-field resize-none" rows={3} placeholder="Describe the project, your role, and impact…" value={item.description} onChange={e => update(idx, 'description', e.target.value)} />
         </div>
       ))}
-      <button onClick={add} className="w-full btn-ghost border border-dashed border-ink-600 hover:border-ink-400 flex items-center justify-center gap-2 py-2.5">
+      <button onClick={add} className="w-full btn-ghost border border-dashed border-stone-300 hover:border-ink-400 flex items-center justify-center gap-2 py-2.5">
         <Plus size={14} /> Add Project
       </button>
     </div>
@@ -262,11 +262,11 @@ export function LanguagesEditor({ content, onChange }) {
             <option value="Basic">Basic</option>
           </select>
           {items.length > 1 && (
-            <button onClick={() => remove(idx)} className="text-ink-500 hover:text-rose-400"><Trash2 size={13} /></button>
+            <button onClick={() => remove(idx)} className="text-stone-400 hover:text-rose-400"><Trash2 size={13} /></button>
           )}
         </div>
       ))}
-      <button onClick={add} className="w-full btn-ghost border border-dashed border-ink-600 hover:border-ink-400 flex items-center justify-center gap-2 py-2">
+      <button onClick={add} className="w-full btn-ghost border border-dashed border-stone-300 hover:border-ink-400 flex items-center justify-center gap-2 py-2">
         <Plus size={14} /> Add Language
       </button>
     </div>

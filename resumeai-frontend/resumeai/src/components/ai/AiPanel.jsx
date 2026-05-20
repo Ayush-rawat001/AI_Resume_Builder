@@ -14,9 +14,7 @@ export default function AiPanel({ targetSection, onApply, onClose }) {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    // Load quota on mount
     aiApi.quota().then(q => setAiQuota(q)).catch(() => {})
-    // Pre-fill input with existing content if improving
     if (targetSection?.content) {
        const content = typeof targetSection.content === 'string' ? targetSection.content : JSON.stringify(targetSection.content);
        setInput(content.substring(0, 200));
@@ -41,7 +39,6 @@ export default function AiPanel({ targetSection, onApply, onClose }) {
       else if (mode === 'ATS') result = await aiApi.checkAts(payload)
 
       setOutput(result)
-      // Refresh quota
       aiApi.quota().then(q => setAiQuota(q)).catch(() => {})
     } catch (err) {
       toast.error(err.message || 'AI generation failed')
@@ -65,22 +62,22 @@ export default function AiPanel({ targetSection, onApply, onClose }) {
   ]
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center p-4">
-      <div className="card w-full max-w-lg animate-slide-up overflow-hidden">
+    <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center p-4">
+      <div className="bg-white w-full max-w-lg animate-slide-up overflow-hidden rounded-2xl border border-stone-200 shadow-2xl">
         {/* Header */}
-        <div className="flex items-center gap-3 p-4 border-b border-ink-700/60 bg-gradient-to-r from-gold-500/5 to-transparent">
-          <div className="w-8 h-8 rounded-lg bg-gold-500/20 border border-gold-500/30 flex items-center justify-center">
-            <Sparkles size={15} className="text-gold-400" />
+        <div className="flex items-center gap-3 p-4 border-b border-stone-100 bg-gradient-to-r from-orange-50 to-transparent">
+          <div className="w-8 h-8 rounded-lg bg-orange-100 border border-orange-200 flex items-center justify-center">
+            <Sparkles size={15} className="text-orange-500" />
           </div>
           <div className="flex-1">
-            <h3 className="font-semibold text-white text-sm">AI Assistant</h3>
-            <p className="text-xs text-ink-400">Target: <span className="text-gold-400">{targetSection?.title || 'Resume'}</span></p>
+            <h3 className="font-semibold text-stone-800 text-sm">AI Assistant</h3>
+            <p className="text-xs text-stone-400">Target: <span className="text-orange-500">{targetSection?.title || 'Resume'}</span></p>
           </div>
           <div className="flex items-center gap-2">
             {aiQuota !== null && (
-              <div className="flex items-center gap-1.5 bg-ink-700/60 border border-ink-600/40 rounded-full px-3 py-1">
-                <Zap size={11} className="text-gold-400" />
-                <span className="text-xs text-ink-300">{aiQuota} left</span>
+              <div className="flex items-center gap-1.5 bg-orange-50 border border-orange-200 rounded-full px-3 py-1">
+                <Zap size={11} className="text-orange-500" />
+                <span className="text-xs text-stone-600">{aiQuota} left</span>
               </div>
             )}
             <button onClick={onClose} className="btn-ghost p-1.5"><X size={14} /></button>
@@ -88,13 +85,13 @@ export default function AiPanel({ targetSection, onApply, onClose }) {
         </div>
 
         {/* Mode Selector */}
-        <div className="flex border-b border-ink-700/60 bg-ink-800/50">
+        <div className="flex border-b border-stone-100 bg-stone-50">
           {modes.map(m => (
             <button
               key={m.id}
               onClick={() => setMode(m.id)}
               className={`flex-1 py-2.5 text-[11px] font-medium transition-colors ${
-                mode === m.id ? 'text-gold-400 border-b-2 border-gold-400 bg-gold-400/5' : 'text-ink-500 hover:text-ink-300'
+                mode === m.id ? 'text-orange-500 border-b-2 border-orange-500 bg-orange-50' : 'text-stone-400 hover:text-stone-600'
               }`}
             >
               {m.label}
@@ -138,17 +135,17 @@ export default function AiPanel({ targetSection, onApply, onClose }) {
             <div className="animate-fade-in space-y-3 pt-2">
               <div className="flex items-center justify-between">
                 <label className="label mb-0">Result</label>
-                <button onClick={generate} className="text-[11px] text-ink-400 hover:text-white flex items-center gap-1">
+                <button onClick={generate} className="text-[11px] text-stone-400 hover:text-stone-700 flex items-center gap-1">
                    <RefreshCw size={11} /> Retry
                 </button>
               </div>
-              <div className="bg-ink-700/40 border border-ink-600/60 rounded-xl p-4 text-sm text-ink-200 leading-relaxed whitespace-pre-wrap">
+              <div className="bg-orange-50 border border-orange-100 rounded-xl p-4 text-sm text-stone-700 leading-relaxed whitespace-pre-wrap">
                 {output}
               </div>
               {mode !== 'ATS' && (
                 <button
                   onClick={apply}
-                  className="w-full btn-secondary flex items-center justify-center gap-2 border-jade-500/40 text-jade-400 hover:bg-jade-400/5"
+                  className="w-full btn-primary flex items-center justify-center gap-2"
                 >
                   <Check size={14} /> Apply Changes
                 </button>

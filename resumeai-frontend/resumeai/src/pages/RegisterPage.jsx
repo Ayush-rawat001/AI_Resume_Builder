@@ -31,22 +31,22 @@ export default function RegisterPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-ink-900 flex items-center justify-center p-8">
-      <div className="w-full max-w-md animate-slide-up">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-amber-50 flex items-center justify-center p-8">
+      <div className="w-full max-w-md animate-slide-up bg-white rounded-2xl shadow-lg border border-stone-200 p-8">
         {/* Logo */}
         <div className="flex items-center gap-2 mb-8">
-          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center shadow-lg shadow-gold-500/20">
-            <Sparkles size={16} className="text-ink-900" />
+          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-md shadow-orange-200">
+            <Sparkles size={16} className="text-white" />
           </div>
-          <span className="font-display text-xl font-bold text-white">
-            Resume<span className="text-gold-400">AI</span>
+          <span className="font-display text-xl font-bold text-stone-800">
+            Resume<span className="text-orange-500">AI</span>
           </span>
         </div>
 
-        <h1 className="font-display text-3xl font-bold text-white mb-2">Create account</h1>
-        <p className="text-ink-400 text-sm mb-8">
+        <h1 className="font-display text-3xl font-bold text-stone-900 mb-2">Create account</h1>
+        <p className="text-stone-500 text-sm mb-8">
           Already have one?{' '}
-          <Link to="/login" className="text-gold-400 hover:text-gold-300 font-medium transition-colors">
+          <Link to="/login" className="text-orange-500 hover:text-orange-400 font-medium transition-colors">
             Sign in
           </Link>
         </p>
@@ -56,7 +56,7 @@ export default function RegisterPage() {
             <div key={key}>
               <label className="label">{label}</label>
               <div className="relative">
-                <Icon size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-400" />
+                <Icon size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400" />
                 <input
                   type={type}
                   className="input-field pl-10"
@@ -72,7 +72,7 @@ export default function RegisterPage() {
           <div>
             <label className="label">Password</label>
             <div className="relative">
-              <Lock size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-400" />
+              <Lock size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400" />
               <input
                 type={showPw ? 'text' : 'password'}
                 className="input-field pl-10 pr-10"
@@ -85,7 +85,7 @@ export default function RegisterPage() {
               <button
                 type="button"
                 onClick={() => setShowPw(!showPw)}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-ink-400 hover:text-ink-200 transition-colors"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 transition-colors"
               >
                 {showPw ? <EyeOff size={15} /> : <Eye size={15} />}
               </button>
@@ -99,13 +99,13 @@ export default function RegisterPage() {
           >
             {loading ? (
               <>
-                <div className="w-4 h-4 border-2 border-ink-800/40 border-t-ink-800 rounded-full animate-spin" />
+                <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
                 Creating account…
               </>
             ) : 'Create free account'}
           </button>
 
-          <p className="text-xs text-ink-500 text-center pt-2">
+          <p className="text-xs text-stone-400 text-center pt-2">
             Free plan includes 10 AI requests and unlimited resumes.
           </p>
         </form>
