@@ -56,12 +56,12 @@ export default function TemplateSwitcher({ onClose }) {
                   onClick={() => applyTemplate(template)}
                   className={`relative rounded-xl overflow-hidden border-2 transition-all duration-200 group ${
                     isSelected
-                      ? 'border-jade-400 shadow-lg shadow-orange-200/20'
-                      : 'border-stone-200 hover:border-ink-500'
+                      ? 'border-orange-400 shadow-lg shadow-orange-200/20'
+                      : 'border-stone-200 hover:border-stone-400'
                   }`}
                 >
                   {/* Preview */}
-                  <div className="aspect-[3/4] bg-gradient-to-br from-ink-700 to-ink-800 flex items-center justify-center relative">
+                  <div className="aspect-[3/4] bg-gradient-to-br from-stone-100 to-stone-200 flex items-center justify-center relative">
                     {template.thumbnailUrl ? (
                       <img src={template.thumbnailUrl} alt={template.name} className="w-full h-full object-cover" />
                     ) : (
@@ -74,8 +74,8 @@ export default function TemplateSwitcher({ onClose }) {
                     {/* Premium badge */}
                     {template.isPremium && (
                       <div className="absolute top-2 right-2 flex items-center gap-1 bg-orange-500/90 rounded-full px-2 py-0.5">
-                        <Lock size={9} className="text-ink-900" />
-                        <span className="text-[9px] text-ink-900 font-bold">PRO</span>
+                        <Lock size={9} className="text-stone-900" />
+                        <span className="text-[9px] text-stone-900 font-bold">PRO</span>
                       </div>
                     )}
 

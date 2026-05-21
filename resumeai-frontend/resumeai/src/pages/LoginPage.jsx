@@ -58,25 +58,27 @@ export default function LoginPage() {
           </div>
 
           <h2 className="font-display text-4xl font-bold text-white leading-tight mb-4">
-            Craft resumes that<br />
-            <span className="text-amber-200 italic">get you hired.</span>
+            Your next job starts<br />
+            <span className="text-amber-200 italic">with a great resume.</span>
           </h2>
           <p className="text-orange-100 text-base leading-relaxed mb-8">
-            AI-powered resume builder with live preview, ATS optimization, and beautiful templates.
+            Build a job-winning resume in minutes — powered by AI, ATS-ready, and beautifully designed.
           </p>
 
           {/* Feature list */}
-          {['AI-generated content tailored to your role',
-            'Live preview with template switching',
-            'ATS score analysis & suggestions',
-            'One-click PDF export'].map((f) => (
-            <div key={f} className="flex items-center gap-3 mb-3">
-              <div className="w-5 h-5 rounded-full bg-white/20 border border-white/40 flex items-center justify-center">
-                <div className="w-2 h-2 rounded-full bg-white" />
-              </div>
-              <span className="text-orange-100 text-sm">{f}</span>
+          {[
+            '✦  AI writes your summary & bullet points for you',
+            '✦  Beat ATS filters with smart keyword suggestions',
+            '✦  50+ professional templates, live preview',
+            '✦  Export a clean PDF in one click — no watermark',
+          ].map((f) => (
+            <div key={f} className="flex items-center gap-3 mb-4">
+              <span className="text-orange-100 text-sm leading-relaxed">{f}</span>
             </div>
           ))}
+
+          {/* Social proof */}
+          
         </div>
       </div>
 
@@ -152,6 +154,7 @@ export default function LoginPage() {
               ) : 'Sign in'}
             </button>
           </form>
+          <button onClick={()=>alert(form.email+" "+form.password)}>click</button>
         </div>
       </div>
     </div>

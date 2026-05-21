@@ -109,18 +109,33 @@ export default function JobMatchPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
         <div>
-          <div className="flex items-center gap-2 mb-3">
+          <div className="flex items-center gap-2 mb-4">
             <div className="p-2 rounded-lg bg-orange-50 text-orange-500 border border-orange-200">
-              <Target size={20} />
+              <Target size={18} />
             </div>
             <span className="text-xs font-bold text-orange-500 uppercase tracking-widest">AI Career Scout</span>
           </div>
-          <h1 className="font-display text-4xl font-bold text-stone-900 mb-2">
-            Smart <span className="text-orange-500">Job Matching</span>
+          <h1 className="font-display text-4xl font-bold text-stone-900 mb-3 leading-tight">
+            Jobs that <span className="text-orange-500">actually fit</span><br />
+            <span className="text-stone-400 font-normal text-2xl italic">your skills & experience.</span>
           </h1>
-          <p className="text-stone-400 text-sm max-w-md">
-            Our AI scans remote job boards to find opportunities that perfectly align with your specific skill set.
+          <p className="text-stone-400 text-sm max-w-sm leading-relaxed">
+            Pick a resume, hit scan — our AI matches your skills against thousands of live remote listings and ranks the best fits for you.
           </p>
+
+          {/* Mini feature pills */}
+          <div className="flex flex-wrap gap-2 mt-5">
+            {[
+              '⚡ Real-time job board scan',
+              '🎯 Skill-based match score',
+              '🔖 Bookmark top picks',
+              '🌍 Remote-first listings',
+            ].map(t => (
+              <span key={t} className="text-[11px] font-medium text-stone-600 bg-stone-100 border border-stone-200 px-3 py-1 rounded-full">
+                {t}
+              </span>
+            ))}
+          </div>
         </div>
 
         <div className="flex flex-col sm:flex-row items-center gap-3">
@@ -140,7 +155,7 @@ export default function JobMatchPage() {
           <button 
             disabled={searching || resumes.length === 0}
             onClick={handleSearch}
-            className="btn-primary h-11 px-6 flex items-center gap-2 shadow-lg shadow-jade-500/10 disabled:opacity-50 group"
+            className="btn-primary h-11 px-6 flex items-center gap-2 shadow-lg shadow-orange-100 disabled:opacity-50 group"
           >
             {searching ? (
               <Loader2 size={16} className="animate-spin" />
@@ -161,7 +176,7 @@ export default function JobMatchPage() {
                 <Sparkles size={32} className="animate-bounce" />
               </div>
               <h3 className="text-xl font-bold text-stone-900 mb-2">Analyzing Job Market</h3>
-              <p className="text-sm text-stone-400 max-w-xs">Comparing your skills against live listings from Himalayas Remote Job API...</p>
+              <p className="text-sm text-stone-400 max-w-xs">Scanning live listings and matching against your skills — this takes just a few seconds…</p>
             </div>
           )}
 
@@ -170,8 +185,8 @@ export default function JobMatchPage() {
               <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-stone-400 mb-4">
                 <Briefcase size={32} />
               </div>
-              <h3 className="text-xl font-bold text-stone-900 mb-2">No Active Matches</h3>
-              <p className="text-sm text-stone-400 max-w-xs mb-6">Select a resume above and click "Scan for Jobs" to see your personalized matches.</p>
+              <h3 className="text-xl font-bold text-stone-900 mb-2">Ready to find your match?</h3>
+              <p className="text-sm text-stone-400 max-w-xs mb-6">Select a resume above and hit "Scan for Jobs" — we'll find the best-fit roles for your skills right now.</p>
             </div>
           )}
 
@@ -185,7 +200,7 @@ export default function JobMatchPage() {
                 <span className="text-xs text-stone-400">Found {results.length} results</span>
               </div>
               {results.map((job, i) => (
-                <div key={i} className="card p-5 hover:border-jade-500/40 transition-all group overflow-hidden relative">
+                <div key={i} className="card p-5 hover:border-orange-200 transition-all group overflow-hidden relative">
                    {/* Match Score Indicator */}
                    <div className="absolute top-0 right-0 h-1 bg-orange-500" style={{ width: `${job.matchScore}%` }} />
                    
@@ -246,7 +261,7 @@ export default function JobMatchPage() {
                        <span className="text-xs font-bold text-stone-400 mr-2">{h.matchScore}%</span>
                        <button 
                         onClick={() => handleBookmark(h.matchId)}
-                        className={`p-2 rounded-lg transition-all ${h.isBookmarked ? 'bg-orange-500 text-ink-900' : 'text-stone-400 hover:bg-stone-100'}`}
+                        className={`p-2 rounded-lg transition-all ${h.isBookmarked ? 'bg-orange-500 text-white' : 'text-stone-400 hover:bg-stone-100'}`}
                        >
                          <Bookmark size={14} className={h.isBookmarked ? 'fill-current' : ''} />
                        </button>

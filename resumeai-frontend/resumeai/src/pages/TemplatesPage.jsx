@@ -52,7 +52,7 @@ export default function TemplatesPage() {
             className={`px-4 py-1.5 rounded-full text-xs font-medium capitalize transition-all duration-200 ${
               filter === f
                 ? 'bg-orange-100 text-orange-500 border border-orange-300'
-                : 'text-stone-400 hover:text-stone-900 border border-stone-200 hover:border-ink-500'
+                : 'text-stone-400 hover:text-stone-900 border border-stone-200 hover:border-stone-400'
             }`}
           >
             {f}
@@ -80,11 +80,11 @@ export default function TemplatesPage() {
                 key={template.templateId} 
                 onClick={() => isLocked && setShowPricing(true)}
                 className={`card overflow-hidden group transition-all duration-300 ${
-                  isLocked ? 'cursor-pointer hover:border-jade-500/50' : 'hover:border-ink-500/60'
+                  isLocked ? 'cursor-pointer hover:border-orange-300' : 'hover:border-stone-400'
                 }`}
               >
                 {/* Preview */}
-                <div className="aspect-[3/4] bg-gradient-to-br from-ink-700 to-ink-800 relative flex items-center justify-center overflow-hidden">
+                <div className="aspect-[3/4] bg-gradient-to-br from-stone-100 to-stone-200 relative flex items-center justify-center overflow-hidden">
                   {template.thumbnailUrl ? (
                     <img src={template.thumbnailUrl} alt={template.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   ) : (
@@ -96,15 +96,15 @@ export default function TemplatesPage() {
 
                   {/* PRO Badge */}
                   {template.isPremium && (
-                    <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-orange-500 text-ink-900 rounded-full px-2.5 py-1 shadow-lg z-10">
-                      <Crown size={10} className="fill-ink-900" />
+                    <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-orange-500 text-stone-900 rounded-full px-2.5 py-1 shadow-lg z-10">
+                      <Crown size={10} className="fill-stone-900" />
                       <span className="text-[10px] font-bold uppercase tracking-tighter">PRO</span>
                     </div>
                   )}
 
                   {/* Lock Overlay for Free Users */}
                   {isLocked && (
-                    <div className="absolute inset-0 bg-stone-50/60 backdrop-blur-[2px] flex flex-col items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                    <div className="absolute inset-0 bg-white/70 backdrop-blur-[2px] flex flex-col items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
                       <div className="w-12 h-12 rounded-full bg-orange-100 border border-orange-300 flex items-center justify-center text-orange-500 mb-3 shadow-2xl">
                         <Lock size={20} />
                       </div>

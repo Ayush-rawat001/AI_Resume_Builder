@@ -295,10 +295,10 @@ export default function EditorPage() {
         </div>
 
         {/* Actions */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <button
             onClick={() => setShowTemplateSwitcher(true)}
-            className="btn-ghost flex items-center gap-1.5 text-xs"
+            className="btn-ghost text-xs px-3 py-1.5 rounded-xl"
             title="Switch template"
           >
             <Palette size={14} />
@@ -307,39 +307,40 @@ export default function EditorPage() {
 
           <button
             onClick={() => setShowPreview(!showPreview)}
-            className="btn-ghost flex items-center gap-1.5 text-xs"
-            title="Toggle preview"
+            className="btn-icon"
+            title={showPreview ? 'Hide preview' : 'Show preview'}
           >
-            {showPreview ? <EyeOff size={14} /> : <Eye size={14} />}
-            <span className="hidden sm:block">{showPreview ? 'Hide' : 'Preview'}</span>
+            {showPreview ? <EyeOff size={15} /> : <Eye size={15} />}
           </button>
 
           <button
             onClick={handleManualSave}
             disabled={saving || !isDirty}
-            className="btn-ghost flex items-center gap-1.5 text-xs disabled:opacity-40"
+            className="btn-icon disabled:opacity-30"
+            title="Save"
           >
-            <Save size={14} />
-            <span className="hidden sm:block">Save</span>
+            <Save size={15} />
           </button>
 
           {!currentResume?.isPublic && (
             <button
               onClick={handlePublish}
-              className="btn-ghost flex items-center gap-1.5 text-xs text-orange-500 hover:bg-orange-50"
+              className="btn-icon-orange"
+              title="Publish"
             >
-              <Globe size={14} />
-              <span className="hidden sm:block">Publish</span>
+              <Globe size={15} />
             </button>
           )}
+
+          <div className="w-px h-5 bg-stone-200 mx-1" />
 
           <button
             onClick={handleExportPdf}
             disabled={exporting}
-            className="btn-primary flex items-center gap-1.5 text-xs"
+            className="btn-primary text-xs px-4 py-2"
           >
             {exporting ? <Loader2 size={13} className="animate-spin" /> : <Download size={13} />}
-            <span>Export PDF</span>
+            Export PDF
           </button>
         </div>
       </header>
@@ -354,19 +355,19 @@ export default function EditorPage() {
               Sections
               <span className="ml-2 text-xs font-normal text-stone-400">({sections.length})</span>
             </span>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <button
                 onClick={() => setAiTarget({ sectionId: null, sectionType: 'SUMMARY', title: 'AI Assistant' })}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-orange-500 bg-orange-50 hover:bg-orange-100 border border-orange-200 rounded-lg transition-all"
+                className="btn-icon-orange w-8 h-8 rounded-xl"
+                title="AI Assistant"
               >
-                <Sparkles size={12} />
-                AI
+                <Sparkles size={14} />
               </button>
               <button
                 onClick={() => setShowAddSection(true)}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-stone-900 bg-stone-100 hover:bg-stone-100 border border-stone-300/60 rounded-lg transition-all"
+                className="btn-primary text-xs px-3 py-1.5 rounded-xl"
               >
-                <Plus size={12} />
+                <Plus size={13} />
                 Add
               </button>
             </div>

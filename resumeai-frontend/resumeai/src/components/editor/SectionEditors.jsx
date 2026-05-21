@@ -62,7 +62,7 @@ export function ExperienceEditor({ content, onChange }) {
           </div>
         </div>
       ))}
-      <button onClick={add} className="w-full btn-ghost border border-dashed border-stone-300 hover:border-ink-400 flex items-center justify-center gap-2 py-2.5">
+      <button onClick={add} className="w-full btn-ghost border border-dashed border-stone-300 hover:border-orange-300 flex items-center justify-center gap-2 py-2.5">
         <Plus size={14} /> Add Position
       </button>
     </div>
@@ -105,7 +105,7 @@ export function EducationEditor({ content, onChange }) {
           </div>
         </div>
       ))}
-      <button onClick={add} className="w-full btn-ghost border border-dashed border-stone-300 hover:border-ink-400 flex items-center justify-center gap-2 py-2.5">
+      <button onClick={add} className="w-full btn-ghost border border-dashed border-stone-300 hover:border-orange-300 flex items-center justify-center gap-2 py-2.5">
         <Plus size={14} /> Add Education
       </button>
     </div>
@@ -184,7 +184,7 @@ export function CertificationsEditor({ content, onChange }) {
           <input className="input-field" placeholder="Issuing Organization" value={item.issuer} onChange={e => update(idx, 'issuer', e.target.value)} />
         </div>
       ))}
-      <button onClick={add} className="w-full btn-ghost border border-dashed border-stone-300 hover:border-ink-400 flex items-center justify-center gap-2 py-2">
+      <button onClick={add} className="w-full btn-ghost border border-dashed border-stone-300 hover:border-orange-300 flex items-center justify-center gap-2 py-2">
         <Plus size={14} /> Add Certification
       </button>
     </div>
@@ -213,7 +213,7 @@ export function ProjectsEditor({ content, onChange }) {
           <textarea className="input-field resize-none" rows={3} placeholder="Describe the project, your role, and impact…" value={item.description} onChange={e => update(idx, 'description', e.target.value)} />
         </div>
       ))}
-      <button onClick={add} className="w-full btn-ghost border border-dashed border-stone-300 hover:border-ink-400 flex items-center justify-center gap-2 py-2.5">
+      <button onClick={add} className="w-full btn-ghost border border-dashed border-stone-300 hover:border-orange-300 flex items-center justify-center gap-2 py-2.5">
         <Plus size={14} /> Add Project
       </button>
     </div>
@@ -266,7 +266,7 @@ export function LanguagesEditor({ content, onChange }) {
           )}
         </div>
       ))}
-      <button onClick={add} className="w-full btn-ghost border border-dashed border-stone-300 hover:border-ink-400 flex items-center justify-center gap-2 py-2">
+      <button onClick={add} className="w-full btn-ghost border border-dashed border-stone-300 hover:border-orange-300 flex items-center justify-center gap-2 py-2">
         <Plus size={14} /> Add Language
       </button>
     </div>

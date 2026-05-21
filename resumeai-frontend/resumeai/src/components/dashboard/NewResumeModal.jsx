@@ -3,7 +3,7 @@ import { useAuthStore, useResumeStore, useTemplateStore } from '../../store'
 import { resumeApi, sectionApi } from '../../api'
 import { defaultContent, stringifyContent } from '../../utils/sections'
 import toast from 'react-hot-toast'
-import { X, Loader2, FileText, Briefcase, CheckCircle2, Lock, Crown } from 'lucide-react'
+import { X, Loader2, FileText, Briefcase, CheckCircle2, Lock, Crown, Rocket } from 'lucide-react'
 import PricingModal from '../premium/PricingModal'
 
 export default function NewResumeModal({ onClose, onCreated }) {
@@ -38,23 +38,8 @@ export default function NewResumeModal({ onClose, onCreated }) {
     try {
       const resume = await resumeApi.create({ ...form, userId: user.userId, templateId: Number(form.templateId) })
       const resumeId = resume.resumeId
-
-      await sectionApi.create({
-        resumeId,
-        sectionType: 'CUSTOM',
-        title: 'Contact',
-        content: stringifyContent(defaultContent('CUSTOM')),
-        displayOrder: 0,
-      })
-
-      await sectionApi.create({
-        resumeId,
-        sectionType: 'SUMMARY',
-        title: 'Professional Summary',
-        content: stringifyContent(defaultContent('SUMMARY')),
-        displayOrder: 1,
-      })
-
+      await sectionApi.create({ resumeId, sectionType: 'CUSTOM', title: 'Contact', content: stringifyContent(defaultContent('CUSTOM')), displayOrder: 0 })
+      await sectionApi.create({ resumeId, sectionType: 'SUMMARY', title: 'Professional Summary', content: stringifyContent(defaultContent('SUMMARY')), displayOrder: 1 })
       setResumes([...resumes, resume])
       toast.success('Resume created!')
       onCreated(resumeId)
@@ -67,34 +52,31 @@ export default function NewResumeModal({ onClose, onCreated }) {
 
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto" onClick={onClose}>
-      <div
-        className="bg-white w-full max-w-4xl p-8 animate-slide-up rounded-2xl border border-stone-200 shadow-2xl my-auto"
-        onClick={e => e.stopPropagation()}
-      >
-        <div className="flex items-center justify-between mb-8">
+      <div className="bg-white w-full max-w-4xl rounded-3xl border border-stone-200 shadow-2xl animate-slide-up my-auto overflow-hidden" onClick={e => e.stopPropagation()}>
+
+        {/* Top bar */}
+        <div className="flex items-center justify-between px-8 py-5 border-b border-stone-100">
           <div>
-            <h2 className="font-display text-2xl font-bold text-stone-900">Create Your <span className="text-orange-500">Masterpiece</span></h2>
-            <p className="text-stone-400 text-sm mt-1">Fill in the details and choose a stunning layout</p>
+            <h2 className="font-display text-xl font-bold text-stone-900">New Resume</h2>
+            <p className="text-sm text-stone-400 mt-0.5">Choose a layout and fill in the basics</p>
           </div>
-          <button onClick={onClose} className="btn-ghost p-2 hover:bg-rose-50 text-stone-400 hover:text-rose-500 transition-all">
-            <X size={20} />
-          </button>
+          <button onClick={onClose} className="btn-icon"><X size={18} /></button>
         </div>
 
-        <form onSubmit={handleCreate} className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-          <div className="space-y-6">
+        <form onSubmit={handleCreate} className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+          {/* Left: Form */}
+          <div className="p-8 space-y-5 border-r border-stone-100">
             <div>
               <label className="label">Resume Title</label>
               <div className="relative">
-                <FileText size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400" />
+                <FileText size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400" />
                 <input
                   type="text"
-                  className="input-field pl-12 h-12"
+                  className="input-field pl-10"
                   placeholder="e.g. Software Engineer Resume"
                   value={form.title}
                   onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
-                  required
-                  autoFocus
+                  required autoFocus
                 />
               </div>
             </div>
@@ -102,10 +84,10 @@ export default function NewResumeModal({ onClose, onCreated }) {
             <div>
               <label className="label">Target Job Title</label>
               <div className="relative">
-                <Briefcase size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400" />
+                <Briefcase size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400" />
                 <input
                   type="text"
-                  className="input-field pl-12 h-12"
+                  className="input-field pl-10"
                   placeholder="e.g. Senior Frontend Developer"
                   value={form.targetJobTitle}
                   onChange={e => setForm(f => ({ ...f, targetJobTitle: e.target.value }))}
@@ -115,11 +97,7 @@ export default function NewResumeModal({ onClose, onCreated }) {
 
             <div>
               <label className="label">Language</label>
-              <select
-                className="input-field h-12"
-                value={form.language}
-                onChange={e => setForm(f => ({ ...f, language: e.target.value }))}
-              >
+              <select className="input-field" value={form.language} onChange={e => setForm(f => ({ ...f, language: e.target.value }))}>
                 <option value="en">English</option>
                 <option value="es">Spanish</option>
                 <option value="fr">French</option>
@@ -127,54 +105,47 @@ export default function NewResumeModal({ onClose, onCreated }) {
               </select>
             </div>
 
-            <div className="flex gap-4 pt-6">
-              <button type="button" onClick={onClose} className="btn-secondary h-12 flex-1">Cancel</button>
-              <button
-                type="submit"
-                disabled={loading}
-                className="btn-primary h-12 flex-[2] flex items-center justify-center gap-2 disabled:opacity-50"
-              >
-                {loading ? <><Loader2 size={18} className="animate-spin" /> Preparing...</> : 'Launch Editor'}
+            <div className="flex gap-3 pt-4">
+              <button type="button" onClick={onClose} className="btn-secondary flex-1">Cancel</button>
+              <button type="submit" disabled={loading} className="btn-primary flex-[2] disabled:opacity-50">
+                {loading ? <><Loader2 size={15} className="animate-spin" /> Creating…</> : <><Rocket size={15} /> Launch Editor</>}
               </button>
             </div>
           </div>
 
-          <div>
-            <label className="label mb-4">Choose Visual Style</label>
-            <div className="grid grid-cols-2 gap-4 max-h-[360px] overflow-y-auto pr-2 custom-scrollbar">
+          {/* Right: Templates */}
+          <div className="p-8">
+            <label className="label mb-4">Choose Layout</label>
+            <div className="grid grid-cols-2 gap-3 max-h-[360px] overflow-y-auto pr-1">
               {templates.map(t => {
                 const isLocked = t.isPremium && !isPremiumUser
+                const isSelected = form.templateId === t.templateId
                 return (
-                  <div 
+                  <div
                     key={t.templateId}
                     onClick={() => handleSelectTemplate(t)}
-                    className={`relative group cursor-pointer rounded-2xl overflow-hidden border-2 transition-all duration-300 ${
-                      form.templateId === t.templateId 
-                        ? 'border-orange-400 shadow-xl shadow-orange-100 scale-[1.02]' 
-                        : isLocked ? 'border-stone-200 opacity-80 hover:opacity-100' : 'border-stone-200 hover:border-stone-300'
+                    className={`relative group cursor-pointer rounded-2xl overflow-hidden border-2 transition-all duration-200 ${
+                      isSelected
+                        ? 'border-orange-400 shadow-lg shadow-orange-100 scale-[1.02]'
+                        : 'border-stone-200 hover:border-stone-300'
                     }`}
                   >
-                    <img src={t.thumbnailUrl} alt={t.name} className="w-full h-32 object-cover transition-transform group-hover:scale-110" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                    
-                    <div className="absolute bottom-2 left-3 right-3 flex items-center justify-between">
+                    <img src={t.thumbnailUrl} alt={t.name} className="w-full h-28 object-cover transition-transform duration-300 group-hover:scale-105" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-2 left-2.5 right-2.5 flex items-center justify-between">
                       <span className="text-[10px] font-bold text-white uppercase tracking-wider truncate">{t.name}</span>
-                      {form.templateId === t.templateId && <CheckCircle2 size={14} className="text-orange-300 fill-orange-400/20" />}
-                      {isLocked && <Lock size={12} className="text-orange-300/70" />}
+                      {isSelected && <CheckCircle2 size={14} className="text-orange-300 flex-shrink-0" />}
                     </div>
-
                     {t.isPremium && (
-                      <div className="absolute top-2 right-2 bg-orange-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full uppercase flex items-center gap-1">
-                        <Crown size={8} />
-                        PRO
+                      <div className="absolute top-2 right-2 bg-orange-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full flex items-center gap-0.5">
+                        <Crown size={7} /> PRO
                       </div>
                     )}
-
                     {isLocked && (
-                      <div className="absolute inset-0 bg-white/30 backdrop-blur-[1px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                         <div className="bg-orange-50 p-2 rounded-full border border-orange-200 text-orange-500">
-                           <Lock size={16} />
-                         </div>
+                      <div className="absolute inset-0 bg-white/40 backdrop-blur-[1px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="bg-white rounded-xl p-2 shadow border border-stone-200 text-orange-500">
+                          <Lock size={16} />
+                        </div>
                       </div>
                     )}
                   </div>

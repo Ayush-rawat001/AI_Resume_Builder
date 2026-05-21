@@ -1,7 +1,7 @@
 import { Outlet, NavLink, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../../store'
 import {
-  LayoutDashboard, Palette, User, LogOut, Sparkles, ChevronRight, ShieldCheck, Crown, Target
+  LayoutDashboard, Palette, User, LogOut, Sparkles, ShieldCheck, Crown, Target, Zap
 } from 'lucide-react'
 import PricingModal from '../premium/PricingModal'
 import { useState } from 'react'
@@ -11,10 +11,7 @@ export default function Layout() {
   const navigate = useNavigate()
   const [showPricing, setShowPricing] = useState(false)
 
-  const handleLogout = () => {
-    clearAuth()
-    navigate('/login')
-  }
+  const handleLogout = () => { clearAuth(); navigate('/login') }
 
   const isPremium = user?.subscriptionPlan === 'PREMIUM'
   const isAdmin = user?.role === 'Admin' || user?.email === 'admin@test.com'
@@ -25,102 +22,100 @@ export default function Layout() {
     { to: '/job-match', icon: Target, label: 'Job Match' },
     { to: '/profile', icon: User, label: 'Profile' },
   ]
-
-  if (isAdmin) {
-    navItems.push({ to: '/admin', icon: ShieldCheck, label: 'Admin Panel' })
-  }
+  if (isAdmin) navItems.push({ to: '/admin', icon: ShieldCheck, label: 'Admin' })
 
   return (
-    <div className="flex min-h-screen bg-stone-50">
-      {/* Sidebar */}
-      <aside className="w-64 flex flex-col border-r border-stone-200 bg-white shadow-sm">
+    <div className="flex min-h-screen bg-[#fafaf8]">
+      {/* ── Sidebar ── */}
+      <aside className="w-60 flex flex-col border-r border-stone-200 bg-white">
+
         {/* Logo */}
-        <div className="p-6 border-b border-stone-100">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-md shadow-orange-200">
-              <Sparkles size={16} className="text-white" />
+        <div className="px-5 py-5 border-b border-stone-100">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-md shadow-orange-200">
+              <Sparkles size={14} className="text-white" />
             </div>
-            <div>
-              <span className="font-display font-bold text-stone-800 text-lg leading-none">Resume</span>
-              <span className="font-display font-bold text-orange-500 text-lg leading-none">AI</span>
-            </div>
+            <span className="font-display font-bold text-stone-900 text-[17px] tracking-tight">
+              Resume<span className="text-orange-500">AI</span>
+            </span>
           </div>
         </div>
 
         {/* Nav */}
-        <nav className="flex-1 p-4 space-y-1">
+        <nav className="flex-1 px-3 py-4 space-y-0.5">
           {navItems.map(({ to, icon: Icon, label }) => (
             <NavLink
               key={to}
               to={to}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 group ${
+                `flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium transition-all duration-150 group ${
                   isActive
-                    ? 'bg-orange-50 text-orange-600 border border-orange-200'
+                    ? 'bg-orange-500 text-white shadow-md shadow-orange-200'
                     : 'text-stone-500 hover:text-stone-900 hover:bg-stone-100'
                 }`
               }
             >
               {({ isActive }) => (
                 <>
-                  <Icon size={16} className={isActive ? 'text-orange-500' : 'text-stone-400 group-hover:text-stone-600'} />
+                  <Icon size={15} className={isActive ? 'text-white' : 'text-stone-400 group-hover:text-stone-600'} />
                   <span>{label}</span>
-                  {isActive && <ChevronRight size={12} className="ml-auto text-orange-400" />}
                 </>
               )}
             </NavLink>
           ))}
         </nav>
 
-        {/* Premium Upgrade CTA */}
+        {/* Upgrade CTA */}
         {!isPremium && !isAdmin && (
-          <div className="mx-4 mb-4 p-4 rounded-2xl bg-gradient-to-br from-orange-50 to-amber-50 border border-orange-200">
-            <div className="flex items-center gap-2 mb-2 text-orange-500">
-              <Crown size={14} className="fill-orange-100" />
-              <span className="text-[11px] font-bold uppercase tracking-wider">Premium Plan</span>
+          <div className="mx-3 mb-3 p-4 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-500 text-white">
+            <div className="flex items-center gap-1.5 mb-1.5">
+              <Zap size={13} className="text-amber-200" />
+              <span className="text-[11px] font-bold uppercase tracking-wider text-orange-100">Go Premium</span>
             </div>
-            <p className="text-[10px] text-stone-500 mb-3 leading-relaxed">
-              Unlock PRO templates and 10x more AI credits.
+            <p className="text-[11px] text-orange-100 mb-3 leading-relaxed">
+              Unlock all templates &amp; 10× AI credits
             </p>
-            <button 
+            <button
               onClick={() => setShowPricing(true)}
-              className="w-full py-2 bg-orange-500 hover:bg-orange-400 text-white text-[11px] font-bold rounded-lg transition-all shadow-md shadow-orange-200 active:scale-95"
+              className="w-full py-2 bg-white hover:bg-orange-50 text-orange-600 text-[12px] font-bold rounded-xl transition-all active:scale-95"
             >
               Upgrade Now
             </button>
           </div>
         )}
 
-        {/* User section */}
-        <div className="p-4 border-t border-stone-100">
-          <div className="flex items-center gap-3 px-3 py-2 rounded-xl mb-2 hover:bg-stone-50 transition-colors cursor-pointer" onClick={() => navigate('/profile')}>
-            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white shadow ${
+        {/* User */}
+        <div className="px-3 pb-3 border-t border-stone-100 pt-3">
+          <div
+            className="flex items-center gap-2.5 px-3 py-2 rounded-xl mb-1 hover:bg-stone-50 cursor-pointer transition-colors"
+            onClick={() => navigate('/profile')}
+          >
+            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0 ${
               isPremium ? 'bg-gradient-to-br from-orange-400 to-orange-600' : 'bg-gradient-to-br from-amber-400 to-orange-500'
             }`}>
-              {isPremium ? <Crown size={14} className="text-white" /> : (user?.email?.[0]?.toUpperCase() || 'U')}
+              {isPremium ? <Crown size={13} /> : (user?.email?.[0]?.toUpperCase() || 'U')}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-bold text-stone-800 truncate">{user?.email?.split('@')[0]}</p>
-              <div className="flex items-center gap-2">
-                <p className={`text-[10px] font-medium uppercase tracking-tighter ${isPremium ? 'text-orange-500' : 'text-stone-400'}`}>
-                  {user?.subscriptionPlan || 'FREE'} PLAN
-                </p>
-                {isAdmin && <span className="text-[9px] bg-stone-100 text-stone-600 px-1.5 py-0.5 rounded border border-stone-200 font-bold uppercase tracking-tighter">Admin</span>}
-              </div>
+              <p className="text-[12px] font-semibold text-stone-800 truncate">{user?.email?.split('@')[0]}</p>
+              <p className={`text-[10px] font-medium uppercase tracking-wide ${isPremium ? 'text-orange-500' : 'text-stone-400'}`}>
+                {user?.subscriptionPlan || 'FREE'}
+              </p>
             </div>
+            {isAdmin && (
+              <span className="text-[9px] bg-stone-100 text-stone-500 px-1.5 py-0.5 rounded-lg border border-stone-200 font-bold">ADMIN</span>
+            )}
           </div>
           <button
             onClick={handleLogout}
-            className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-stone-400 hover:text-rose-500 hover:bg-rose-50 transition-all duration-200"
+            className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-[13px] text-stone-400 hover:text-rose-500 hover:bg-rose-50 transition-all"
           >
-            <LogOut size={15} />
-            <span>Sign Out</span>
+            <LogOut size={14} />
+            <span>Sign out</span>
           </button>
         </div>
       </aside>
 
-      {/* Main */}
-      <main className="flex-1 overflow-auto bg-stone-50">
+      <main className="flex-1 overflow-auto bg-[#fafaf8]">
         <Outlet />
       </main>
 
